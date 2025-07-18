@@ -1,5 +1,6 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: To-Do Task-API
+  title: To-Do Gerenciamento de Tarefa API
+  de
 paths: {}
