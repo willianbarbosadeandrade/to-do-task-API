@@ -1,0 +1,10 @@
+{
+  "main": "to-do-task-api.yaml",
+  "name": "to-do-task-API",
+  "groupId": "00e213b4-1e2e-4a18-9b08-02188f8f13fa",
+  "assetId": "to-do-task-api",
+  "version": "1.0.0",
+  "classifier": "oas",
+  "tags": [],
+  "descriptorVersion": "1.0.0"
+}
