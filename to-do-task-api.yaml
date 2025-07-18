@@ -1,6 +1,150 @@
 openapi: "3.0.0"
 info:
   version: 1.0.0
-  title: To-Do Gerenciamento de Tarefa API
-  description: Uma simples API para Gerenciamento de tarefas To-Do. Operações CRUD completas para tarefas em um contexto de usuário unico
-paths: {}
+  title: API To-Do Gerenciamento de Tarefa 
+  description: Uma simples API para Gerenciamento de tarefas To-Do. Operações CRUD completas para tarefas em um contexto de usuário único
+
+paths:
+  /tasks:
+    get:
+      summary: Lista de todas as tarefas
+      description: Recuperar uma lista de todas as tarefas, filtrando por status de conclusão e data de vencimento
+      parameters:
+        - in: query
+          name: concluida
+          schema:
+            type: boolean
+          description: Filtrar tarefas por status de conclusão (true ou false)
+        - in: query
+          name: dataDeValidade
+          schema:
+            type: string
+            format: date
+          description: Filtrar tarefas por data de conclusão (DD-MM-YYYY)
+      responses:
+        "200":
+          description: Lista de tarefas
+          content:
+            application/json:
+              schema:
+                type: array
+                items: 
+                  $ref: "#/components/schemas/Task"
+      
+
+    post:
+      summary: Criar uma nova tarefa
+      description: Adicionar uma nova tarefa na lista To-Do
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: 
+              $ref: "#/components/schemas/TaskInput"
+      responses:
+        "201":
+          description: Tarefa criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"        
+  /tasks/{taskID};
+    parameters:
+      - in: path
+      name: taskID
+      required: true
+      schema:
+        $ref:
+    get:
+      summary: Obter uma tarefa por ID
+      description: Recuperar uma tarefa especifica pelo seu ID exclusivo
+      responses:
+        "200":
+          description: Detalhes da tarefa
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "404":
+          description: Tarefa nao encontrada        
+    put:
+      summary: Atualizar uma tarefa
+      description: Atualizar uma tarefa existente pelo seu ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskInput"
+      responses:
+        "200":
+          description: Tarefa atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+        "404":
+          description: Tarefa nao encontrada                
+    delete:
+      summary: Deletar uma tarefa
+      description: Remover uma tarefa da lista pelo seu ID
+      responses:
+        "204":
+          description: Tarefa atualizada com sucesso
+        "404":
+          description: Tarefa nao encontrada
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "1"
+        title:
+          type: string
+          example: Comprar alimentos
+        description:
+          type: string
+          example: Leite, Pao, ovos
+        duaDate:
+          type: string
+          format: date
+          example: 01-01-2026
+        completed:
+          type: boolean
+          default: false
+      required: 
+        - id
+        - title
+        - completed
+    TaskInput:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Comprar alimentos
+        description:
+          type: string
+          example: Leite, Pao, ovos
+        duaDate:
+          type: string
+          format: date
+          example: 01-01-2026
+        completed:
+          type: boolean
+          default: false
+      required: 
+        - title
+        - completed
+            
+        
+          
+          
+          
+          
+          
+          
+          
+            
+      
