@@ -2,5 +2,5 @@ openapi: "3.0.0"
 info:
   version: 1.0.0
   title: To-Do Gerenciamento de Tarefa API
-  description: Uma simples API para Gerenciamento de tarefas To-Do. Operaço
+  description: Uma simples API para Gerenciamento de tarefas To-Do. Operações CRUD completas para tarefas em um contexto de usuário unico
 paths: {}
